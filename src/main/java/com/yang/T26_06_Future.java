@@ -10,8 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 认识future(将来)
- * @author Jcon
- *
+ * Callable和Future，通过它们可以在任务执行完毕之后得到任务执行结果
  */
 public class T26_06_Future {
 

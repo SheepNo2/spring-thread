@@ -32,8 +32,8 @@ public class T25_7_DelayQueue {
 
 		long runningTime;
 		
-		public MyTask(long rt) {
-			this.runningTime = rt;
+		public MyTask(long runningTime) {
+			this.runningTime = runningTime;
 		}
 		
 		@Override
