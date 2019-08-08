@@ -11,17 +11,19 @@ import java.util.concurrent.Future;
 
 /**
  * 线程池的概念
- * @author Jcon
  *
  */
 public class T26_07_ParalleComputing {
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		//单线程
 		long start = System.currentTimeMillis();
 		List<Integer> results = getPrime(1, 200000);
+//		System.out.println(results.size());
 		long end = System.currentTimeMillis();
 		System.out.println(end - start);
-		
+
+		//对比上面的，4线程，对比时间
 		final int cupCoreNum = 4;
 		
 		ExecutorService service = Executors.newFixedThreadPool(cupCoreNum);
@@ -35,13 +37,12 @@ public class T26_07_ParalleComputing {
 		Future<List<Integer>> f2 = service.submit(myTask2);
 		Future<List<Integer>> f3 = service.submit(myTask3);
 		Future<List<Integer>> f4 = service.submit(myTask4);
-		
+
 		start = System.currentTimeMillis();
 		f1.get();
 		f2.get();
 		f3.get();
 		f4.get();
-		end = System.currentTimeMillis();
 		System.out.println(end - start);
 		
 	}
@@ -60,7 +61,12 @@ public class T26_07_ParalleComputing {
 			return r;
 		}
 	}
-	
+
+	/**
+	 * 开方，然后除2....，返回true是质数，false为素数
+	 * @param num
+	 * @return
+	 */
 	static boolean isPrime(int num){
 		for (int i = 2; i <= Math.sqrt(num); i++) {
 			if (num % i == 0) {
@@ -69,7 +75,13 @@ public class T26_07_ParalleComputing {
 		}
 		return true;
 	}
-	
+
+	/**
+	 * 计算从start到end之前都有多少个质数
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	static List<Integer> getPrime(int start, int end){
 		List<Integer> results = new ArrayList<Integer>();
 		for (int i = start; i <= end; i++) {
